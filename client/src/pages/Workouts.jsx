@@ -73,7 +73,6 @@ const SecTitle = styled.div`
 `;
 
 const Workouts = () => {
-  const dispatch = useDispatch();
   const [todaysWorkouts, setTodaysWorkouts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState("");
@@ -90,7 +89,7 @@ const Workouts = () => {
 
   useEffect(() => {
     getTodaysWorkout();
-  }, [date]);
+  }, [date, getTodaysWorkout]);
   return (
     <Container>
       <Wrapper>
