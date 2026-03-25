@@ -14,7 +14,7 @@ const baseURL =
   process.env.NODE_ENV === "development"
     ? process.env.REACT_APP_DEV_REMOTE_API || "/api/"
     : process.env.REACT_APP_API_URL ||
-      "https://fitnesstrack-vtv1.onrender.com/api/";
+      "https://fitness-tracker-2-54l3.onrender.com/api/";
 
 const API = axios.create({
   baseURL,
