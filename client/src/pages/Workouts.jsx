@@ -6,7 +6,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { getWorkouts } from "../api";
 import { CircularProgress } from "@mui/material";
-import { useDispatch } from "react-redux";
 
 const Container = styled.div`
   flex: 1;
@@ -77,19 +76,18 @@ const Workouts = () => {
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState("");
 
-  const getTodaysWorkout = async () => {
-    setLoading(true);
-    const token = localStorage.getItem("fittrack-app-token");
-    await getWorkouts(token, date ? `?date=${date}` : "").then((res) => {
-      setTodaysWorkouts(res?.data?.todaysWorkouts);
-      console.log(res.data);
-      setLoading(false);
-    });
-  };
-
   useEffect(() => {
+    const getTodaysWorkout = async () => {
+      setLoading(true);
+      const token = localStorage.getItem("fittrack-app-token");
+      await getWorkouts(token, date ? `?date=${date}` : "").then((res) => {
+        setTodaysWorkouts(res?.data?.todaysWorkouts);
+        console.log(res.data);
+        setLoading(false);
+      });
+    };
     getTodaysWorkout();
-  }, [date, getTodaysWorkout]);
+  }, [date]);
   return (
     <Container>
       <Wrapper>
