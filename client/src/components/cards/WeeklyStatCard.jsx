@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { LineChart } from "@mui/x-charts/LineChart";
+import { BarChart } from "@mui/x-charts/BarChart";
 
 const Card = styled.div`
   flex: 1;
@@ -16,75 +16,28 @@ const Card = styled.div`
     padding: 16px;
   }
 `;
-
 const Title = styled.div`
   font-weight: 600;
   font-size: 16px;
   color: ${({ theme }) => theme.primary};
-`;
-
-const Hint = styled.div`
-  font-size: 13px;
-  color: ${({ theme }) => theme.text_secondary};
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
 `;
 
 const WeeklyStatCard = ({ data }) => {
-  let weeks = data?.totalWeeksCaloriesBurnt?.weeks ?? [];
-  let calories = data?.totalWeeksCaloriesBurnt?.caloriesBurned ?? [];
-
-  // fallback data
-  if (weeks.length === 0 || calories.length === 0) {
-    const today = new Date();
-    weeks = Array.from({ length: 7 }, (_, i) => {
-      const d = new Date(today);
-      d.setDate(d.getDate() - (6 - i));
-      return d.toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-      });
-    });
-    calories = [0, 0, 0, 0, 0, 0, 0];
-  }
-
-  const aligned =
-    weeks.length === calories.length
-      ? calories
-      : weeks.map((_, i) => calories[i] ?? 0);
-
-  // ✅ Daily calories (NOT cumulative)
-  const dailyCalories = aligned.map((v) => Number(v || 0));
-
   return (
     <Card>
-      <Title>Daily calories burned</Title>
-
-      {!data && <Hint>Loading chart…</Hint>}
-
-      {data && dailyCalories.every((v) => v === 0) && (
-        <Hint>No workouts logged in last 7 days.</Hint>
+      <Title>Weekly Calories Burned</Title>
+      {data?.totalWeeksCaloriesBurnt && (
+        <BarChart
+          xAxis={[
+            { scaleType: "band", data: data?.totalWeeksCaloriesBurnt?.weeks },
+          ]}
+          series={[{ data: data?.totalWeeksCaloriesBurnt?.caloriesBurned }]}
+          height={300}
+        />
       )}
-
-      <LineChart
-        xAxis={[
-          {
-            scaleType: "band",
-            data: weeks,
-            label: "Day",
-          },
-        ]}
-        yAxis={[{ label: "Calories burned (daily)" }]}
-        series={[
-          {
-            data: dailyCalories, // ✅ FIXED HERE
-            label: "Daily Burn",
-            area: true,
-            curve: "monotoneX",
-          },
-        ]}
-        height={300}
-        margin={{ left: 56, right: 16, top: 24, bottom: 40 }}
-      />
     </Card>
   );
 };
