@@ -172,7 +172,7 @@ const Navbar = ({ currentUser }) => {
           {!isTrainer && (
             <>
               <Navlink to="/workouts">Workouts</Navlink>
-              <Navlink to="/book-session">Book</Navlink>
+              <Navlink to="/book-session">book</Navlink>
               <Navlink to="/history">History</Navlink>
             </>
           )}
