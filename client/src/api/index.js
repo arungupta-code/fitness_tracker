@@ -115,3 +115,18 @@ export const userEndSession = async (token, bookingId) =>
     {},
     { headers: { Authorization: `Bearer ${token}` } }
   );
+
+export const getCommunityPosts = async (token) =>
+  API.get("/community", { headers: { Authorization: `Bearer ${token}` } });
+
+export const createCommunityPost = async (token, content) =>
+  API.post(
+    "/community",
+    { content },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+
+export const deleteCommunityPost = async (token, postId) =>
+  API.delete(`/community/${postId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });

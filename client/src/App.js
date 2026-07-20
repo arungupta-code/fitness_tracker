@@ -9,6 +9,7 @@ import Workouts from "./pages/Workouts";
 import BookSession from "./pages/BookSession";
 import History from "./pages/History";
 import TrainerDashboard from "./pages/TrainerDashboard";
+import Community from "./pages/Community";
 
 const Container = styled.div`
   width: 100%;
@@ -35,6 +36,7 @@ function App() {
             {isTrainer ? (
               <Routes>
                 <Route path="/" element={<TrainerDashboard />} />
+                <Route path="/community" element={<Community />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             ) : (
@@ -43,6 +45,7 @@ function App() {
                 <Route path="/workouts" element={<Workouts />} />
                 <Route path="/book-session" element={<BookSession />} />
                 <Route path="/history" element={<History />} />
+                <Route path="/community" element={<Community />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             )}

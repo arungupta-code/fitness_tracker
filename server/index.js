@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./routes/User.js";
 import TrainerRoutes from "./routes/Trainer.js";
+import CommunityRoutes from "./routes/Community.js";
 import Workout from "./models/Workout.js";
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/user/", UserRoutes);
 app.use("/api/trainer/", TrainerRoutes);
+app.use("/api/community/", CommunityRoutes);
 
 app.use((err, req, res, next) => {
   const status = err.status || 500;

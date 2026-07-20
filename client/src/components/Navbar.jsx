@@ -148,6 +148,9 @@ const Navbar = ({ currentUser }) => {
           <Navlink to="/" onClick={() => setisOpen(false)}>
             Dashboard
           </Navlink>
+          <Navlink to="/community" onClick={() => setisOpen(false)}>
+            Community
+          </Navlink>
           {!isTrainer && (
             <>
               <Navlink to="/workouts" onClick={() => setisOpen(false)}>
@@ -165,10 +168,11 @@ const Navbar = ({ currentUser }) => {
 
         <NavItems>
           <Navlink to="/">Dashboard</Navlink>
+          <Navlink to="/community">Community</Navlink>
           {!isTrainer && (
             <>
               <Navlink to="/workouts">Workouts</Navlink>
-              <Navlink to="/book-session">Book a session</Navlink>
+              <Navlink to="/book-session">Book</Navlink>
               <Navlink to="/history">History</Navlink>
             </>
           )}
